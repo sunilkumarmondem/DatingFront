@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" routerLink='/'>Dating</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse"  id="navbarCollapse">
+
+    <ul class="navbar-nav mr-auto" *ngIf="loggedIn">
+      <ng-container >
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='/members'>Matches </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/lists'>Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/messages'>Messages</a>
+        </li>
+      </ng-container>
+     
+    </ul>
+
+    <div ngbDropdown class="dropdown" *ngIf="loggedIn">
+      <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false">
+   Welcome {{userName | titlecase}}
+    </button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+        <li><a ngbDropdownItem routerLink="/member/edit">Edit Profile</a></li>
+        <li><a ngbDropdownItem href="#" (click)="logout()">Logout</a></li>
+      </ul>
+    </div>
+
+    <form #loginForm="ngForm" *ngIf="!loggedIn" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete ="off">
+      <input name="userName" [(ngModel)]="model.userName" class="form-control mr-sm-2" type="text" placeholder="userName" >
+      <input name="password" [(ngModel)]="model.password" class="form-control mr-sm-2" type="password" placeholder="password" >
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+
+  </div>
+</nav>
